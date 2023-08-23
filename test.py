@@ -56,11 +56,28 @@ class Test_cplx_functions(unittest.TestCase):
         conj_2 = cplx_lib.conj_cplx((5, 7.2))
         self.assertAlmostEqual(conj_2[0], 5)
         self.assertAlmostEqual(conj_2[1], -7.2)
+    def test_polar(self):
+        # 1. (3+4i) = (5, 0.93)
+        polar_1 = cplx_lib.repre_polar((3,4))
+        self.assertAlmostEqual(polar_1[0], 5)
+        self.assertAlmostEqual(polar_1[1], 0.9272952180016122)
+        # 1. (-2+5.5i) = (5.85, 1.92)
+        polar_2 = cplx_lib.repre_polar((-2, 5.5))
+        self.assertAlmostEqual(polar_2[0], 5.852349955359813)
+        self.assertAlmostEqual(polar_2[1], 1.9195673303788037)
     def test_carte(self):
-        # 1. (5, 30) = (4.3+2.5i)
-        carte_1 = cplx_lib.repre_cartesiana((5, 30))
-        self.assertAlmostEqual(carte_1[0], carte_1[0]*math.cos(carte_1[1]))
-        self.assertAlmostEqual(carte_1[1], carte_1[0]*math.sin(carte_1[1]))
-
+        # 1. (2,20) = (0.82+1.83i)
+        carte_1 = cplx_lib.repre_cartesiana((2,20))
+        self.assertAlmostEqual(carte_1[0], 0.816164123626784)
+        self.assertAlmostEqual(carte_1[1], 1.8258905014552553)
+        # 2. (7,90) = (-3.14+6.26i)
+        carte_2 = cplx_lib.repre_cartesiana((7, 90))
+        self.assertAlmostEqual(carte_2[0], -3.1365153129041907)
+        self.assertAlmostEqual(carte_2[1], 6.257976645203905)
+    def test_fase(self):
+        # 1. (3+4i) = (0.93)
+        self.assertAlmostEqual(cplx_lib.fase_cplx((3, 4)),0.9272952180016122)
+        # 2. (-2.5+7i) = (0.93)
+        self.assertAlmostEqual(cplx_lib.fase_cplx((-2.5, 7)), 1.9138202672156)
 if __name__ == '__main__':
     unittest.main()
